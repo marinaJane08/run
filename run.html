@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<title>Run</title>
+<style>
+html,body{
+    padding: 0;
+    margin:0;
+    box-sizing: border-box;
+    height: 100%;
+}
+textarea,iframe{
+    width:50%;
+    height:calc(100% - 50px);
+    margin-top: 20px;
+    float:left;
+    font-size: 20px;
+    box-sizing: border-box;
+}
+#run,#vue{
+    position: absolute;
+    left: 50%;
+    margin-left: -3rem;
+}
+#vue{
+    left: calc(50% + 50px);
+}
+</style>
+</head>
+
+<textarea id="text" style="display:block;">
+    <!DOCTYPE html>
+    <html>
+    <body>
+    <head>
+    <meta charset="utf-8">
+    <title>Inner</title>
+    </head>
+    
+    <div id="app">
+
+    </div>
+    <script>
+    "use strict"
+    
+    </script>
+
+    </body>
+    </html>
+</textarea>
+<textarea id="vueText" style="display:none;">
+    <!DOCTYPE html>
+    <html>
+    <body>
+    <head>
+    <meta charset="utf-8">
+    <title>Inner</title>
+    </head>
+    
+    <div id="app">
+
+    </div>
+    <script src="./run/vue.js"></script>
+
+    <script>
+    "use strict"
+    var Main = {
+        data () {
+            return {
+                name:'Vue'
+            }
+        }
+    }
+    var Component = Vue.extend(Main)
+    var app=new Component().$mount('#app')
+
+    </script>
+
+    </body>
+    </html>
+</textarea>
+
+<button id="run" onclick="run()">RUN</button>
+<button id="vue" onclick="openVue()">VUE</button>
+<iframe id="frame"></iframe>
+<script>
+function run(){
+    // alert(document.getElementById("text").value)
+	document.getElementById("frame").srcdoc=document.getElementById("text").style.display== 'none'? document.getElementById("vueText").value : document.getElementById("text").value;
+}
+function openVue(){
+    document.getElementById("vueText").style.display=document.getElementById("vueText").style.display== 'none'? 'block':'none';
+    document.getElementById("text").style.display=document.getElementById("text").style.display== 'none'? 'block':'none';
+}
+</script>
+</body>
+</html>
